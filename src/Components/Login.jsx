@@ -1,13 +1,37 @@
 import React from "react";
+import SplitText from "../SmallComp/SplitText";
+import { Link } from "react-router";
+
 
 const Login = () => {
+    const handleAnimationComplete = () => {
+        console.log("All letters have animated!");
+    };
     return (
         <div className="min-h-[calc(100vh-71px)] flex flex-col items-center justify-center bg-base-200">
             <div className="border-2 border-gray-300 rounded-2xl shadow-2xl">
-                <div className="w-sm px-6 py-4 border-b-2 border-dashed border-gray-300 flex justify-center">
+                <div className="md:w-sm w-xs px-6 py-4 border-b-2 border-dashed border-gray-300 flex justify-center">
                     <form className="space-y-4 w-full">
                         <h1 className="text-2xl font-bold text-center">
-                            Login Now
+                            <SplitText
+                                text="Login Now"
+                                className="text-2xl font-semibold text-center"
+                                delay={150}
+                                animationFrom={{
+                                    opacity: 0,
+                                    transform: "translate3d(0,50px,0)",
+                                }}
+                                animationTo={{
+                                    opacity: 1,
+                                    transform: "translate3d(0,0,0)",
+                                }}
+                                easing="easeOutCubic"
+                                threshold={0.2}
+                                rootMargin="-50px"
+                                onLetterAnimationComplete={
+                                    handleAnimationComplete
+                                }
+                            />
                         </h1>
 
                         <div>
@@ -32,6 +56,7 @@ const Login = () => {
                                 Login
                             </button>
                         </div>
+                        <h1 className="text-sm text-gray-500">Don't have account? <Link to='/auth/register' className="underline">Register</Link></h1>
                     </form>
                 </div>
                 <div className="px-6 py-4">
