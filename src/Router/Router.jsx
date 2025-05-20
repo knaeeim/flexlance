@@ -4,11 +4,13 @@ import Home from "../Components/Home";
 import AddTask from "../Components/AddTask";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <HomeLayOut></HomeLayOut>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -28,4 +30,8 @@ export const router = createBrowserRouter([
             }
         ],
     },
+    {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
+    }
 ]);

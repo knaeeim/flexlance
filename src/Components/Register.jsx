@@ -5,7 +5,8 @@ import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
-    const { createUser, setUser, profileDataUpdate } = use(AuthContext);
+    const { createUser, setUser, profileDataUpdate, googleSignIn } =
+        use(AuthContext);
 
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
@@ -52,13 +53,65 @@ const Register = () => {
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        if(data.insertedId){
+                        if (data.insertedId) {
                             toast.success("User created successfully");
                         }
                     });
             })
             .catch((error) => {
                 console.log(error.message);
+            });
+    };
+
+    // google Signin
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+                const userData = {
+                    email: user.email,
+                    name: user.displayName,
+                    photo: user.photoURL,
+                };
+
+                console.log(userData);
+
+                // checking that user already exists in database
+                fetch(`http://localhost:3000/users/${user.email}`)
+                    .then((result) => {
+                        console.log(result);
+                        // user data send in database
+                        if (result.status == 404) {
+                            fetch("http://localhost:3000/users", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(userData),
+                            })
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    if (data.insertedId) {
+                                        toast.success(
+                                            "User created successfully"
+                                        );
+                                    }
+                                });
+                        }
+                        else if(result.ok){
+                            toast.success("User logged in successfully");
+                        }
+                        else{
+                            toast.error("Server error while checking user.");
+                        }
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    })
+            })
+            .catch((error) => {
+                toast.error(error.message);
             });
     };
 
@@ -145,7 +198,9 @@ const Register = () => {
                         </form>
                     </div>
                     <div className="px-6 py-4">
-                        <button className="btn w-full bg-white text-black border-[#e5e5e5]">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            className="btn w-full bg-white text-black border-[#e5e5e5]">
                             <svg
                                 aria-label="Google logo"
                                 width="16"

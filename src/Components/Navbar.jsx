@@ -103,19 +103,11 @@ const Navbar = () => {
                 <div className="navbar-end gap-3">
                     {user ? (
                         <>
-                            {user?.photoURL ? (
+                            {user?.photoURL && (
                                 <>
                                     <div className="avatar avatar-online">
                                         <div className="w-8 rounded-full border-2 border-green-500">
                                             <img className="object-center object-cover" src={user.photoURL} />
-                                        </div>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="avatar avatar-online">
-                                        <div className="w-8 rounded-full border-2 border-green-500">
-                                            <img src={<FaUserAltSlash />} />
                                         </div>
                                     </div>
                                 </>

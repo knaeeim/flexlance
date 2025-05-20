@@ -1,24 +1,91 @@
 import React, { use } from "react";
 import SplitText from "../SmallComp/SplitText";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-
+import toast from "react-hot-toast";
 
 const Login = () => {
-
-    // const { name } = use(AuthContext);
+    const { googleSignIn, setUser, emailLogIn } = use(AuthContext);
+    const navigate = useNavigate();
 
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
     };
 
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+                const userData = {
+                    email: user.email,
+                    name: user.displayName,
+                    photo: user.photoURL,
+                };
 
+                console.log(userData);
+
+                // checking that user already exists in database
+                fetch(`http://localhost:3000/users/${user.email}`)
+                    .then((result) => {
+                        console.log(result);
+                        // user data send in database
+                        if (result.status == 404) {
+                            fetch("http://localhost:3000/users", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(userData),
+                            })
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    if (data.insertedId) {
+                                        toast.success(
+                                            "User created successfully"
+                                        );
+                                    }
+                                });
+                        } else if (result.ok) {
+                            toast.success("User logged in successfully");
+                        } else {
+                            toast.error("Server error while checking user.");
+                        }
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
+    const handleEmailLogin = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        emailLogIn(email, password)
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+                navigate("/")
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
 
     return (
         <div className="min-h-[calc(100vh-71px)] flex flex-col items-center justify-center bg-base-200">
             <div className="border-2 border-gray-300 rounded-2xl shadow-2xl">
                 <div className="md:w-sm w-xs px-6 py-4 border-b-2 border-dashed border-gray-300 flex justify-center">
-                    <form className="space-y-4 w-full">
+                    <form
+                        onSubmit={handleEmailLogin}
+                        className="space-y-4 w-full">
                         <h1 className="text-2xl font-bold text-center">
                             <SplitText
                                 text="Login Now"
@@ -44,6 +111,7 @@ const Login = () => {
                         <div>
                             <label className="label">Email</label>
                             <input
+                                name="email"
                                 type="email"
                                 className="input w-full"
                                 placeholder="Email"
@@ -53,6 +121,7 @@ const Login = () => {
                         <div>
                             <label className="label">Password</label>
                             <input
+                                name="password"
                                 type="password"
                                 className="input w-full"
                                 placeholder="Password"
@@ -63,11 +132,18 @@ const Login = () => {
                                 Login
                             </button>
                         </div>
-                        <h1 className="text-sm text-gray-500">Don't have account? <Link to='/auth/register' className="underline">Register</Link></h1>
+                        <h1 className="text-sm text-gray-500">
+                            Don't have account?{" "}
+                            <Link to="/auth/register" className="underline">
+                                Register
+                            </Link>
+                        </h1>
                     </form>
                 </div>
                 <div className="px-6 py-4">
-                    <button className="btn w-full bg-white text-black border-[#e5e5e5]">
+                    <button
+                        onClick={handleGoogleSignIn}
+                        className="btn w-full bg-white text-black border-[#e5e5e5]">
                         <svg
                             aria-label="Google logo"
                             width="16"
