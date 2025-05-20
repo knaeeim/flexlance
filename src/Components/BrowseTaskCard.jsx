@@ -2,12 +2,13 @@ import React, { use } from "react";
 import { FaSackDollar } from "react-icons/fa6";
 import { MdOutlineDateRange } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
+import { Link } from "react-router";
 
 const BrowseTaskCard = ({ post }) => {
-    const { title, category, date, budget, cover, name } =
+    const { _id, title, category, date, budget, cover, name } =
         post;
     const { user } = use(AuthContext);
-    
+
     return (
         <div>
             <div className="block rounded-lg p-4 shadow-xs shadow-indigo-100">
@@ -70,7 +71,7 @@ const BrowseTaskCard = ({ post }) => {
                 </div>
 
                 <div className="flex justify-center items-center mt-4">
-                    <button className="btn btn-primary w-full">View Details</button>
+                    <Link to={`/browseTasks/${_id}`} className="btn btn-primary w-full">View Details</Link>
                 </div>
             </div>
         </div>

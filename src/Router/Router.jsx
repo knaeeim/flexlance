@@ -8,6 +8,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import PrivateRoutes from "../Provider/PrivateRoutes";
 import BrowseTasks from "../Components/BrowseTasks";
 import MyPostedData from "../Components/MyPostedData";
+import BrowseTaskDetails from "../Components/BrowseTaskDetails";
 
 export const router = createBrowserRouter([
     {
@@ -34,8 +35,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/browseTasks/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/allData/${params.id}`),
                 element: <PrivateRoutes>
-                    
+                    <BrowseTaskDetails></BrowseTaskDetails>
                 </PrivateRoutes>
             },
             {
