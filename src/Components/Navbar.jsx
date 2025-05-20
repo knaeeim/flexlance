@@ -115,7 +115,7 @@ const Navbar = () => {
                             <Link
                                 onClick={handleUserLogOut}
                                 to="/auth/login"
-                                className="btn btn-sm bg-red-400 text-white">
+                                className="btn btn-sm bg-[#030303] hover:bg-red-500 text-white">
                                 LogOut
                             </Link>
                         </>
