@@ -1,12 +1,19 @@
-import React from "react";
+import React, { use } from "react";
 import SplitText from "../SmallComp/SplitText";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 
 const Login = () => {
+
+    // const { name } = use(AuthContext);
+
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
     };
+
+
+
     return (
         <div className="min-h-[calc(100vh-71px)] flex flex-col items-center justify-center bg-base-200">
             <div className="border-2 border-gray-300 rounded-2xl shadow-2xl">

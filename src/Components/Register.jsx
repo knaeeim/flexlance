@@ -1,10 +1,65 @@
-import React from "react";
+import React, { use } from "react";
 import SplitText from "../SmallComp/SplitText";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
+    const { createUser, setUser, profileDataUpdate } = use(AuthContext);
+
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
+    };
+
+    const handleCreateUser = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const { email, password, ...rest } = Object.fromEntries(
+            formData.entries()
+        );
+
+        console.log(rest);
+        // create user
+        createUser(email, password)
+            .then((res) => {
+                const user = res.user;
+                // updated user data in global state
+
+                // user data for update
+                const userData = {
+                    displayName: rest.name,
+                    photoURL: rest.photo,
+                };
+
+                // update user profile data in firebase (name, photo)
+                profileDataUpdate(userData)
+                    .then(() => {
+                        setUser((prev) => ({ ...prev, ...user }));
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+
+                // save user to database
+                fetch("http://localhost:3000/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email, ...rest }),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if(data.insertedId){
+                            toast.success("User created successfully");
+                        }
+                    });
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     };
 
     return (
@@ -12,7 +67,9 @@ const Register = () => {
             <div className="min-h-[calc(100vh-71px)] flex flex-col items-center justify-center bg-base-200">
                 <div className="border-2 border-gray-300 rounded-2xl shadow-2xl">
                     <div className="md:w-3xl w-xs px-6 py-4 border-b-2 border-dashed border-gray-300 flex justify-center">
-                        <form className="space-y-4 w-full">
+                        <form
+                            onSubmit={handleCreateUser}
+                            className="space-y-4 w-full">
                             <h1 className="text-2xl font-bold text-center">
                                 <SplitText
                                     text="Register Now"
@@ -48,6 +105,7 @@ const Register = () => {
                                 <div>
                                     <label className="label">Email</label>
                                     <input
+                                        name="email"
                                         type="email"
                                         className="input w-full"
                                         placeholder="Email"
@@ -66,6 +124,7 @@ const Register = () => {
                                 <div>
                                     <label className="label">Password</label>
                                     <input
+                                        name="password"
                                         type="password"
                                         className="input w-full"
                                         placeholder="Password"

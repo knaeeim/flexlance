@@ -1,14 +1,62 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import { FaUserAltSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+    const { user, userLogout } = use(AuthContext);
 
-    const links = <>
-        <NavLink to="/" className={({isActive}) => isActive ? "border-b-2 border-zinc-400 pb-1 px-2 mx-4 font-bold" : "mx-4 pb-1 px-2"}>Home</NavLink>
-        <NavLink to="/addTask" className={({isActive}) => isActive ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2" : "mx-4 pb-1 px-2"}>Add Task</NavLink>
-        <NavLink to="/browseTasks" className={({isActive}) => isActive ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2" : " mx-4 pb-1 px-2"}>Browse Task</NavLink>
-        <NavLink to="/MyPostedTasks" className={({isActive}) => isActive ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2" : "mx-4 pb-1 px-2"}>My Posted Task</NavLink>
-    </>
+    const links = (
+        <>
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 border-zinc-400 pb-1 px-2 mx-4 font-bold"
+                        : "mx-4 pb-1 px-2"
+                }>
+                Home
+            </NavLink>
+            <NavLink
+                to="/addTask"
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
+                        : "mx-4 pb-1 px-2"
+                }>
+                Add Task
+            </NavLink>
+            <NavLink
+                to="/browseTasks"
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
+                        : " mx-4 pb-1 px-2"
+                }>
+                Browse Task
+            </NavLink>
+            <NavLink
+                to="/MyPostedTasks"
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
+                        : "mx-4 pb-1 px-2"
+                }>
+                My Posted Task
+            </NavLink>
+        </>
+    );
+
+    const handleUserLogOut = () => {
+        userLogout()
+        .then(()=>{
+            toast.success("User logged out successfully");
+        })
+        .catch((error) => {
+            toast.error(error.message);
+        })
+    }
 
     return (
         <div>
@@ -41,18 +89,58 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <a className="text-xl flex items-center gap-2">
-                        <img className="w-7 h-7" src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png" alt="" />
+                        <img
+                            className="w-7 h-7"
+                            src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"
+                            alt=""
+                        />
                         Flexlance
                     </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        {links}
-                    </ul>
+                    <ul className="menu menu-horizontal px-1">{links}</ul>
                 </div>
                 <div className="navbar-end gap-3">
-                    <Link to='/auth/login' className="btn btn-sm bg-[#D4C9BE]">Login</Link>
-                    <Link to='/auth/register' className="btn btn-sm bg-[#123458] text-white">Register</Link>
+                    {user ? (
+                        <>
+                            {user?.photoURL ? (
+                                <>
+                                    <div className="avatar avatar-online">
+                                        <div className="w-8 rounded-full border-2 border-green-500">
+                                            <img className="object-center object-cover" src={user.photoURL} />
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="avatar avatar-online">
+                                        <div className="w-8 rounded-full border-2 border-green-500">
+                                            <img src={<FaUserAltSlash />} />
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            <Link
+                                onClick={handleUserLogOut}
+                                to="/auth/login"
+                                className="btn btn-sm bg-red-400 text-white">
+                                LogOut
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to="/auth/login"
+                                className="btn btn-sm bg-[#D4C9BE]">
+                                Login
+                            </Link>
+                            <Link
+                                to="/auth/register"
+                                className="btn btn-sm bg-[#123458] text-white">
+                                Register
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
