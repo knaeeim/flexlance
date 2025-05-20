@@ -6,6 +6,8 @@ import Login from "../Components/Login";
 import Register from "../Components/Register";
 import ErrorPage from "../Pages/ErrorPage";
 import PrivateRoutes from "../Provider/PrivateRoutes";
+import BrowseTasks from "../Components/BrowseTasks";
+import MyPostedData from "../Components/MyPostedData";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +23,19 @@ export const router = createBrowserRouter([
                 path: "/addTask",
                 element: <PrivateRoutes>
                     <AddTask></AddTask>
+                </PrivateRoutes>,
+            },
+            {
+                path: "/browseTasks",
+                loader: () => fetch("http://localhost:3000/allData"),
+                element: <PrivateRoutes>
+                    <BrowseTasks></BrowseTasks>
+                </PrivateRoutes>,
+            },
+            {
+                path: "/myPostedTasks",
+                element: <PrivateRoutes>
+                    <MyPostedData></MyPostedData>
                 </PrivateRoutes>,
             },
             {

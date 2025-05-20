@@ -16,7 +16,7 @@ const AddTask = () => {
         const form = e.target;
         const formData = new FormData(form);
         const obj = Object.fromEntries(formData.entries());
-        const taskObj = { email: user.email, ...obj };
+        const taskObj = { email: user.email, name:user.displayName, ...obj };
         console.log(taskObj);
 
         // send data to database
