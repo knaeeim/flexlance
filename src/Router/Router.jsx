@@ -33,6 +33,12 @@ export const router = createBrowserRouter([
                 </PrivateRoutes>,
             },
             {
+                path: "/browseTasks/:id",
+                element: <PrivateRoutes>
+                    
+                </PrivateRoutes>
+            },
+            {
                 path: "/myPostedTasks",
                 element: <PrivateRoutes>
                     <MyPostedData></MyPostedData>

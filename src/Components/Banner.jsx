@@ -15,7 +15,7 @@ const Banner = () => {
         "https://i.ibb.co/Lz9qKHNh/slide-3.jpg",
     ];
     return (
-        <div>
+        <div className="mb-10">
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={50}
