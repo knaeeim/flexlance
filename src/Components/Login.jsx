@@ -1,12 +1,15 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import SplitText from "../SmallComp/SplitText";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const { googleSignIn, setUser, emailLogIn } = use(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
@@ -44,6 +47,7 @@ const Login = () => {
                                         toast.success(
                                             "User created successfully"
                                         );
+                                        navigate(location.state ? `${location.state}` : "/");
                                     }
                                 });
                         } else if (result.ok) {
@@ -72,7 +76,7 @@ const Login = () => {
             .then((res) => {
                 const user = res.user;
                 setUser(user);
-                navigate("/")
+                navigate(location.state ? `${location.state}` : "/");
             })
             .catch((error) => {
                 toast.error(error.message);
@@ -113,19 +117,31 @@ const Login = () => {
                             <input
                                 name="email"
                                 type="email"
-                                className="input w-full"
+                                className="w-full py-2 px-4 border-2 border-gray-400 rounded-2xl focus:outline-none focus:border-double focus:border-[#123458]"
                                 placeholder="Email"
                             />
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label className="label">Password</label>
                             <input
                                 name="password"
-                                type="password"
-                                className="input w-full"
+                                type={showPassword ? "text" : "password"}
+                                className="w-full py-2 px-4 border-2 border-gray-400 rounded-2xl focus:outline-none focus:border-double focus:border-[#123458]"
                                 placeholder="Password"
+                                required
                             />
+                            <div
+                                className="absolute top-[68%] right-3 transform -translate-y-1/2 cursor-pointer text-gray-600"
+                                onClick={() =>
+                                    setShowPassword((prev) => !prev)
+                                }>
+                                {showPassword ? (
+                                    <FaEyeSlash size={18} />
+                                ) : (
+                                    <FaEye size={18} />
+                                )}
+                            </div>
                         </div>
                         <div className="flex justify-center items-center">
                             <button className="btn btn-primary w-full mt-4">

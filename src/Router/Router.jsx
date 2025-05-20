@@ -5,6 +5,7 @@ import AddTask from "../Components/AddTask";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import ErrorPage from "../Pages/ErrorPage";
+import PrivateRoutes from "../Provider/PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -18,7 +19,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/addTask",
-                element: <AddTask></AddTask>,
+                element: <PrivateRoutes>
+                    <AddTask></AddTask>
+                </PrivateRoutes>,
             },
             {
                 path: "/auth/login",
