@@ -1,11 +1,42 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaCalendarDay } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const MyPostedData = () => {
     const { user } = use(AuthContext);
     const userPostedTask = useLoaderData();
+    const [tasks, setTasks] = useState(userPostedTask);
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/deleteData/${id}`, {
+                    method: "DELETE"
+                })
+                .then(result => result.json())
+                .then(data => {
+                    if(data.deletedCount){
+                        setTasks(prev => prev.filter(task => task._id !== id));
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success",
+                        });
+                    }
+                })
+            }
+        });
+    };
 
     return (
         <div>
@@ -14,7 +45,7 @@ const MyPostedData = () => {
                     {user.displayName}'s Posted Tasks..
                 </h1>
             </div>
-            {userPostedTask.length > 0 ? (
+            {tasks.length > 0 ? (
                 <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 my-10">
                     <table className="table">
                         {/* head */}
@@ -29,7 +60,7 @@ const MyPostedData = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {userPostedTask.map((task, index) => {
+                            {tasks.map((task, index) => {
                                 return (
                                     <tr key={task._id} className="font-bold">
                                         <th>{index + 1}</th>
@@ -51,9 +82,13 @@ const MyPostedData = () => {
                                                 className="btn btn-sm btn-primary">
                                                 Edit
                                             </Link>
-                                            <Link className="btn btn-sm btn-warning">
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(task._id)
+                                                }
+                                                className="btn btn-sm btn-warning">
                                                 Delete
-                                            </Link>
+                                            </button>
                                         </td>
                                         <td>
                                             <button className="btn btn-sm btn-primary text-white">
@@ -67,7 +102,7 @@ const MyPostedData = () => {
                     </table>
                 </div>
             ) : (
-                <div className="text-center mt-10">
+                <div className="text-center h-[calc(100vh-440px)] flex flex-col justify-center items-center">
                     <h1 className="text-2xl font-bold">No Task Posted Yet!</h1>
                     <Link to="/addTask" className="btn btn-primary mt-5">
                         Post a Task
