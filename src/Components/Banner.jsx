@@ -1,6 +1,6 @@
 import React from "react";
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -17,12 +17,13 @@ const Banner = () => {
     return (
         <div className="mb-10">
             <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                modules={[Navigation, Pagination, A11y, Autoplay]}
                 spaceBetween={50}
                 slidesPerView={1}
                 navigation
+                autoplay={{ delay: 3000 }}
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
+                loop={true}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log("slide change")}>
                 {images.map((image, index) => (
