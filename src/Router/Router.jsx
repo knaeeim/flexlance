@@ -10,6 +10,7 @@ import BrowseTasks from "../Components/BrowseTasks";
 import MyPostedData from "../Components/MyPostedData";
 import BrowseTaskDetails from "../Components/BrowseTaskDetails";
 import LoadingPage from "../Pages/LoadingPage";
+import UpdateTask from "../Components/UpdateTask";
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,13 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes>
                     <MyPostedData></MyPostedData>
                 </PrivateRoutes>,
+            },
+            {
+                path: "/myPostedTasks/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/allData/${params.id}`),
+                element: <PrivateRoutes>
+                    <UpdateTask></UpdateTask>
+                </PrivateRoutes>
             },
             {
                 path: "/auth/login",

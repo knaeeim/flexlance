@@ -73,7 +73,7 @@ const BrowseTaskDetails = () => {
 
                     {/* Action Button */}
                     <button className="w-full md:w-auto bg-[#0D9488] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0F766E] transition duration-300">
-                        Apply for This Task
+                        Bid for This Task
                     </button>
                 </div>
             </div>
