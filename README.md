@@ -1,12 +1,55 @@
-# React + Vite
+# 🌐 Flexlance – Freelance Task Posting & Bidding Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Flexlance**, a modern freelance task management platform where clients can post tasks and freelancers can bid in real-time. Built with a focus on user experience, authentication security, and dynamic frontend interactions.
 
-Currently, two official plugins are available:
+🔗 Live Site: [https://flexlance-auth.web.app/](https://flexlance-auth.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔐 Authentication
+- ✅ Google Login via Firebase
+- ✅ Email & Password Authentication
+- ✅ Password validation: must include **uppercase, lowercase, and at least 6 characters**
+- ✅ Secure and protected routes (only authenticated users can access specific pages)
+
+### 🛡️ Protected Routes
+- 🔒 `Add Task`
+- 🔒 `My Posted Task`
+- 🔒 `Update Task` and `Task Details` pages
+
+### 📄 Task Management
+- 📝 Post a new freelance task
+- ✏️ Update an existing task
+- ❌ Delete posted tasks with confirmation
+- 📊 View and track real-time **bid count** for each task
+
+### 🖼️ User Interface
+- 🎨 Featured posts section on the homepage
+- 💻 Grid-based **photo card section with framer-motion** for smooth animations
+- 📦 Services section to highlight platform capabilities
+- 🌙 **Dark Mode / Light Mode** toggle for theme preference
+
+### 📈 Dynamic Animations
+- 🔢 Counting animation using `counting.js` displayed in four stat boxes on the homepage
+
+### 🧠 Additional Functionalities
+- 📬 Real-time user info fetched via email from the database
+- 📈 Live `bidCount` update with visual feedback
+- 📆 Tasks show posting date, budget, and category
+- 💬 Clean and responsive UI with meaningful modal usage
+
+---
+
+## 🚀 Tech Stack
+
+- **React.js** – Frontend library
+- **Firebase** – Authentication (Google & Email/Password)
+- **MongoDB + Express** – Backend API and data storage
+- **Tailwind CSS / DaisyUI** – Styling and component library
+- **Framer Motion** – For smooth card animations
+- **SweetAlert2** – For elegant alert and confirmation modals
+- **Counting.js** – For animated number counters
+
+---

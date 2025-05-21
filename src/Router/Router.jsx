@@ -33,9 +33,7 @@ export const router = createBrowserRouter([
             {
                 path: "/browseTasks",
                 loader: () => fetch("https://flexlance.vercel.app/allData"),
-                element: <PrivateRoutes>
-                    <BrowseTasks></BrowseTasks>
-                </PrivateRoutes>,
+                element: <BrowseTasks></BrowseTasks>
             },
             {
                 path: "/browseTasks/:id",
