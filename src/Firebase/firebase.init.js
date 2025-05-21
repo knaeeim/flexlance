@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBFXEUUqhLg8DT1iotTUBPymp8Ff4n0lRc",
-  authDomain: "flexlance-auth.firebaseapp.com",
-  projectId: "flexlance-auth",
-  storageBucket: "flexlance-auth.firebasestorage.app",
-  messagingSenderId: "347188140814",
-  appId: "1:347188140814:web:eda9d9cac640bf1583d55f"
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
