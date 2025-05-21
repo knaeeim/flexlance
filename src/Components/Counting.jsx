@@ -8,7 +8,7 @@ const Counting = () => {
                 <h1 className="md:text-4xl text-lg font-bold">
                     Empowering Freelancers & Clients Globally
                 </h1>
-                <p className="md:text-lg text-xs text-gray-600 max-w-2xl mx-auto">
+                <p className="md:text-lg text-xs max-w-2xl mx-auto">
                     Connect with top freelancers, post tasks, and get work done quickly and securely.
                     Whether you're a developer, designer, marketer, or client — our platform is built to help you grow.
                 </p>
