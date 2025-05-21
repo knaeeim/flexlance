@@ -39,7 +39,7 @@ const BrowseTaskCard = ({ post }) => {
                         <div>
                             <dt className="sr-only">Title</dt>
 
-                            <dd className="font-medium">{title}</dd>
+                            <dd className="font-medium">{title.split(" ", 6).join(" ")}...</dd>
                         </div>
                     </div>
 

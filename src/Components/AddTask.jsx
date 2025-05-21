@@ -1,9 +1,7 @@
 import { use, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import LoadingPage from "../Pages/LoadingPage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { CgLogOff } from "react-icons/cg";
 import toast from "react-hot-toast";
 
 const AddTask = () => {

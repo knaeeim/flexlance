@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
                 </PrivateRoutes>,
             },
             {
-                path: "/myPostedTasks/:id",
+                path: "/updatedPost/:id",
                 loader: ({ params }) => fetch(`http://localhost:3000/allData/${params.id}`),
                 element: <PrivateRoutes>
                     <UpdateTask></UpdateTask>

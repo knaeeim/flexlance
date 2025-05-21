@@ -1,12 +1,23 @@
-import React, { use, useState } from 'react';
-import { AuthContext } from '../Context/AuthContext';
-import toast from 'react-hot-toast';
+import { use, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router";
+import CustomError from "../Pages/CustomError";
 
 const UpdateTask = () => {
     const { user } = use(AuthContext);
-    const [startDate, setStartDate] = useState(new Date());
+    const [setStartDate] = useState(new Date());
+    const updatedTask = useLoaderData();
+    const navigate = useNavigate();
+    const { _id, title, category, date, budget, cover, description } = updatedTask;
 
-    const handleAddTask = (e) => {
+    if(user.email !== updatedTask.email){
+        return <CustomError></CustomError>
+    }
+
+    const handleUpdateTask = (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -16,8 +27,8 @@ const UpdateTask = () => {
         console.log(taskObj);
 
         // send data to database
-        fetch("http://localhost:3000/addTask", {
-            method: "POST",
+        fetch(`http://localhost:3000/updateData/${_id}`, {
+            method: "PUT",
             headers: {
                 "content-type": "application/json",
             },
@@ -25,8 +36,10 @@ const UpdateTask = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.insertedId) {
-                    toast.success("Task added successfully");
+                console.log(data);
+                if (data.modifiedCount) {
+                    toast.success("Task Updated successfully");
+                    navigate(`/myPostedTasks/${user.email}`);
                 }
             });
     };
@@ -35,17 +48,18 @@ const UpdateTask = () => {
         <div className="max-w-7xl mx-auto p-4 mb-20">
             <div>
                 <h1 className="text-3xl font-bold text-center mb-5">
-                    Add Task
+                    Update Task
                 </h1>
                 <p className="text-center text-gray-500 mb-5">
-                    Fill in the details below to add a new task.
+                    Change in the details below to update your task.
                 </p>
             </div>
-            <form onSubmit={handleAddTask} className="space-y-5">
+            <form onSubmit={handleUpdateTask} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Task Title</label>
                         <input
+                            defaultValue={title}
                             name="title"
                             type="text"
                             className="input w-full"
@@ -54,7 +68,7 @@ const UpdateTask = () => {
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Category</label>
-                        <select className="input w-full" name="category">
+                        <select className="input w-full" name="category" defaultValue={category}>
                             <option disabled={true} selected>
                                 Choose Your Task Category
                             </option>
@@ -73,6 +87,7 @@ const UpdateTask = () => {
                             Task Description
                         </label>
                         <input
+                            defaultValue={description}
                             name="description"
                             type="text"
                             className="input w-full"
@@ -84,13 +99,14 @@ const UpdateTask = () => {
                         <DatePicker
                             name="date"
                             className="w-full input"
-                            selected={startDate}
+                            selected={date}
                             onChange={(date) => setStartDate(date)}
                         />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Budget</label>
                         <input
+                            defaultValue={budget}
                             name="budget"
                             type="text"
                             className="input w-full"
@@ -120,6 +136,7 @@ const UpdateTask = () => {
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Task Image</label>
                         <input
+                            defaultValue={cover}
                             name="cover"
                             type="text"
                             className="input w-full"
@@ -130,7 +147,7 @@ const UpdateTask = () => {
                 <input
                     className="btn btn-primary w-full"
                     type="submit"
-                    value="Add Task"
+                    value="Update Task"
                 />
             </form>
         </div>

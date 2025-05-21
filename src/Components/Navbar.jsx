@@ -69,13 +69,12 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="flex px-10 pt-3 pb-1 bg-base-300 shadow-sm">
-                <div className="navbar-start">
+            <div className="flex md:px-10 px-2 md:pt-3 pt-1 pb-1 bg-base-300 shadow-sm">
+                <div className="navbar-start gap-2">
                     <div className="dropdown">
                         <div
                             tabIndex={0}
-                            role="button"
-                            className="btn btn-ghost lg:hidden">
+                            className="lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -103,7 +102,7 @@ const Navbar = () => {
                             src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"
                             alt=""
                         />
-                        Flexlance
+                        <span className="hidden md:block">Flexlance</span>
                     </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
