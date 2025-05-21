@@ -16,10 +16,15 @@ const AddTask = () => {
         const formData = new FormData(form);
         const obj = Object.fromEntries(formData.entries());
         const taskObj = { email: user.email, name:user.displayName, ...obj };
-
-
         taskObj.bidCount = 0;
-        if(new Date(startDate).toDateString() < new Date().toDateString()){
+
+        const selectedDate = new Date(startDate);
+        const today = new Date();
+
+        selectedDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        if(selectedDate < today){
             return toast.error("Date can't be in the past");
         }
 
