@@ -43,8 +43,8 @@ const BrowseTaskDetails = () => {
                                 alt="User Avatar"
                                 className="w-10 h-10 rounded-full border-2 border-teal-500"
                             />
-                            <span className="text-gray-700 dark:text-gray-300 font-medium">
-                                Posted by <span className="font-semibold">{name}</span>
+                            <span className="text-gray-700 dark:text-gray-300 font-medium text-sm">
+                                Posted by <br /> <span className="font-semibold">{name}</span>
                             </span>
                         </div>
 
