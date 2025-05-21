@@ -9,12 +9,14 @@ import PrivateRoutes from "../Provider/PrivateRoutes";
 import BrowseTasks from "../Components/BrowseTasks";
 import MyPostedData from "../Components/MyPostedData";
 import BrowseTaskDetails from "../Components/BrowseTaskDetails";
+import LoadingPage from "../Pages/LoadingPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <HomeLayOut></HomeLayOut>,
         errorElement: <ErrorPage></ErrorPage>,
+        hydrateFallbackElement: <LoadingPage></LoadingPage>,
         children: [
             {
                 index: true,
@@ -41,7 +43,8 @@ export const router = createBrowserRouter([
                 </PrivateRoutes>
             },
             {
-                path: "/myPostedTasks",
+                path: "/myPostedTasks/:email",
+                loader: ({params}) => fetch(`http://localhost:3000/alldatabyemail/${params.email}`),
                 element: <PrivateRoutes>
                     <MyPostedData></MyPostedData>
                 </PrivateRoutes>,

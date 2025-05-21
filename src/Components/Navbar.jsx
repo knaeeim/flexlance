@@ -42,7 +42,7 @@ const Navbar = () => {
                 Browse Task
             </NavLink>
             <NavLink
-                to="/myPostedTasks"
+                to={`/myPostedTasks/${user?.email}`}
                 className={({ isActive }) =>
                     isActive
                         ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
