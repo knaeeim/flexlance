@@ -4,12 +4,17 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoadingPage from "../Pages/LoadingPage";
 
 const Login = () => {
-    const { googleSignIn, setUser, emailLogIn } = use(AuthContext);
+    const { googleSignIn, setUser, emailLogIn, loading } = use(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [showPassword, setShowPassword] = useState(false);
+
+    if(loading){
+        return <LoadingPage></LoadingPage>
+    }
 
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");

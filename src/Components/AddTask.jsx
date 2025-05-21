@@ -3,6 +3,7 @@ import { AuthContext } from "../Context/AuthContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import LoadingPage from "../Pages/LoadingPage";
 
 const AddTask = () => {
     const { user } = use(AuthContext);

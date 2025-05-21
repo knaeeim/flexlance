@@ -17,11 +17,11 @@ export const router = createBrowserRouter([
         path: "/",
         element: <HomeLayOut></HomeLayOut>,
         errorElement: <ErrorPage></ErrorPage>,
-        hydrateFallbackElement: <LoadingPage></LoadingPage>,
         children: [
             {
                 index: true,
                 loader: () => fetch('https://flexlance.vercel.app/allData'),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <Home></Home>,
             },
             {
@@ -33,11 +33,13 @@ export const router = createBrowserRouter([
             {
                 path: "/browseTasks",
                 loader: () => fetch("https://flexlance.vercel.app/allData"),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <BrowseTasks></BrowseTasks>
             },
             {
                 path: "/browseTasks/:id",
                 loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <PrivateRoutes>
                     <BrowseTaskDetails></BrowseTaskDetails>
                 </PrivateRoutes>
@@ -45,6 +47,7 @@ export const router = createBrowserRouter([
             {
                 path: "/myPostedTasks/:email",
                 loader: ({params}) => fetch(`https://flexlance.vercel.app/alldatabyemail/${params.email}`),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <PrivateRoutes>
                     <MyPostedData></MyPostedData>
                 </PrivateRoutes>,
@@ -52,6 +55,7 @@ export const router = createBrowserRouter([
             {
                 path: "/updatedPost/:id",
                 loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <PrivateRoutes>
                     <UpdateTask></UpdateTask>
                 </PrivateRoutes>

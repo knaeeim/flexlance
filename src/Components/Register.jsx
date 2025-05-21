@@ -5,13 +5,18 @@ import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 import { isPasswordValid } from "../utilities/passwordChecker";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoadingPage from "../Pages/LoadingPage";
 
 const Register = () => {
-    const { createUser, setUser, profileDataUpdate, googleSignIn } =
+    const { createUser, setUser, profileDataUpdate, googleSignIn, loading } =
         use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
+
+    if(loading){
+        return <LoadingPage></LoadingPage>
+    }
 
     const handleAnimationComplete = () => {
         console.log("All letters have animated!");
