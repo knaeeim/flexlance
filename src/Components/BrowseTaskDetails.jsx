@@ -19,7 +19,7 @@ const BrowseTaskDetails = () => {
     const [userPhoto, setUserPhoto] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/users/${email}`)
+        fetch(`https://flexlance.vercel.app/users/${email}`)
             .then((res) => res.json())
             .then((data) => {
                 setUserPhoto(data);
@@ -31,7 +31,7 @@ const BrowseTaskDetails = () => {
         setBid(newBidCount);
 
         // ? update bid Count in database
-        fetch(`http://localhost:3000/updateData/${_id}`, {
+        fetch(`https://flexlance.vercel.app/updateData/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",

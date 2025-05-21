@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: () => fetch('http://localhost:3000/allData'),
+                loader: () => fetch('https://flexlance.vercel.app/allData'),
                 element: <Home></Home>,
             },
             {
@@ -32,28 +32,28 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/browseTasks",
-                loader: () => fetch("http://localhost:3000/allData"),
+                loader: () => fetch("https://flexlance.vercel.app/allData"),
                 element: <PrivateRoutes>
                     <BrowseTasks></BrowseTasks>
                 </PrivateRoutes>,
             },
             {
                 path: "/browseTasks/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/allData/${params.id}`),
+                loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
                 element: <PrivateRoutes>
                     <BrowseTaskDetails></BrowseTaskDetails>
                 </PrivateRoutes>
             },
             {
                 path: "/myPostedTasks/:email",
-                loader: ({params}) => fetch(`http://localhost:3000/alldatabyemail/${params.email}`),
+                loader: ({params}) => fetch(`https://flexlance.vercel.app/alldatabyemail/${params.email}`),
                 element: <PrivateRoutes>
                     <MyPostedData></MyPostedData>
                 </PrivateRoutes>,
             },
             {
                 path: "/updatedPost/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/allData/${params.id}`),
+                loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
                 element: <PrivateRoutes>
                     <UpdateTask></UpdateTask>
                 </PrivateRoutes>

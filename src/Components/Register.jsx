@@ -54,7 +54,7 @@ const Register = () => {
                     });
 
                 // save user to database
-                fetch("http://localhost:3000/users", {
+                fetch("https://flexlance.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -89,12 +89,12 @@ const Register = () => {
                 console.log(userData);
 
                 // checking that user already exists in database
-                fetch(`http://localhost:3000/users/${user.email}`)
+                fetch(`https://flexlance.vercel.app/users/${user.email}`)
                     .then((result) => {
                         // console.log(result);
                         // user data send in database
                         if (result.status == 404) {
-                            fetch("http://localhost:3000/users", {
+                            fetch("https://flexlance.vercel.app/users", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",

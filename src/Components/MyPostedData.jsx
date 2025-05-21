@@ -21,7 +21,7 @@ const MyPostedData = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/deleteData/${id}`, {
+                fetch(`https://flexlance.vercel.app/deleteData/${id}`, {
                     method: "DELETE",
                 })
                     .then((result) => result.json())

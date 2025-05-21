@@ -32,7 +32,7 @@ const UpdateTask = () => {
         console.log(taskObj);
 
         // send data to database
-        fetch(`http://localhost:3000/updateData/${_id}`, {
+        fetch(`https://flexlance.vercel.app/updateData/${_id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",

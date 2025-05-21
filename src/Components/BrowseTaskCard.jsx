@@ -10,7 +10,7 @@ const BrowseTaskCard = ({ post }) => {
     const [userPhoto, setUserPhoto] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/users/${email}`)
+        fetch(`https://flexlance.vercel.app/users/${email}`)
             .then((res) => res.json())
             .then((data) => {
                 setUserPhoto(data);
