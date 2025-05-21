@@ -15,7 +15,12 @@ const AddTask = () => {
         const formData = new FormData(form);
         const obj = Object.fromEntries(formData.entries());
         const taskObj = { email: user.email, name:user.displayName, ...obj };
-        console.log(taskObj);
+
+        
+        taskObj.bidCount = 0;
+        if(new Date(startDate).toDateString() < new Date().toDateString()){
+            return toast.error("Date can't be in the past");
+        }
 
         // send data to database
         fetch("http://localhost:3000/addTask", {

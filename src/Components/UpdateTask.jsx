@@ -8,14 +8,19 @@ import CustomError from "../Pages/CustomError";
 
 const UpdateTask = () => {
     const { user } = use(AuthContext);
-    const [setStartDate] = useState(new Date());
     const updatedTask = useLoaderData();
     const navigate = useNavigate();
-    const { _id, title, category, date, budget, cover, description } = updatedTask;
+    const { _id, title, category, date, budget, cover, description } =
+    updatedTask;
+    const [startDate, setStartDate] = useState(new Date(date));
 
-    if(user.email !== updatedTask.email){
-        return <CustomError></CustomError>
+    if (user.email !== updatedTask.email) {
+        return <CustomError></CustomError>;
     }
+
+    // if (new Date(startDate).toDateString() < new Date().toDateString()) {
+    //     return toast.error("Date can't be in the past");
+    // }
 
     const handleUpdateTask = (e) => {
         e.preventDefault();
@@ -23,7 +28,7 @@ const UpdateTask = () => {
         const form = e.target;
         const formData = new FormData(form);
         const obj = Object.fromEntries(formData.entries());
-        const taskObj = { email: user.email, name:user.displayName, ...obj };
+        const taskObj = { email: user.email, name: user.displayName, ...obj };
         console.log(taskObj);
 
         // send data to database
@@ -68,7 +73,10 @@ const UpdateTask = () => {
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Category</label>
-                        <select className="input w-full" name="category" defaultValue={category}>
+                        <select
+                            className="input w-full"
+                            name="category"
+                            defaultValue={category}>
                             <option disabled={true} selected>
                                 Choose Your Task Category
                             </option>
@@ -99,7 +107,7 @@ const UpdateTask = () => {
                         <DatePicker
                             name="date"
                             className="w-full input"
-                            selected={date}
+                            selected={startDate}
                             onChange={(date) => setStartDate(date)}
                         />
                     </fieldset>

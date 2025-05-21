@@ -13,7 +13,7 @@ const FeaturedTasks = () => {
         <div className="md:my-20 my-10 md:px-10 px-5">
             <div className="my-10">
                 <TrueFocus
-                    sentence="Featured Flexlancers"
+                    sentence="Featured Posts"
                     manualMode={false}
                     blurAmount={5}
                     borderColor="gray"

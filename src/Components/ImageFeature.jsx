@@ -19,7 +19,7 @@ const ImageFeature = () => {
         "https://i.ibb.co/qY9mLQZk/im-2.png",
         "https://i.ibb.co/VppcddXN/im-3.png",
         <div key="jsx-item-4" className="text-xl font-semibold text-yellow-600">
-            Trusted by 5K+ Clients
+            Trusted by 2K+ Clients
         </div>,
         "https://i.ibb.co/TDctcdvd/im-8.png",
         <div key="jsx-item-5" className="text-xl font-semibold text-indigo-600">

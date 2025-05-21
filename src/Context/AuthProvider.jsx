@@ -7,6 +7,7 @@ const AuthProvider = ({children}) => {
 
     const [loading, setloading] = useState(true);
     const [user, setUser] = useState(null);
+    const [bidCountGlobal, setBidCountGlobal] = useState(0);
 
     console.log("User from Auth Provider", user);
 
@@ -60,6 +61,8 @@ const AuthProvider = ({children}) => {
         userLogout,
         googleSignIn,
         emailLogIn,
+        bidCountGlobal,
+        setBidCountGlobal,
     }
 
     return (

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const MyPostedData = () => {
     const { user } = use(AuthContext);
     const userPostedTask = useLoaderData();
+    console.log(userPostedTask);
     const [tasks, setTasks] = useState(userPostedTask);
 
     const handleDelete = (id) => {
@@ -21,19 +22,21 @@ const MyPostedData = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`http://localhost:3000/deleteData/${id}`, {
-                    method: "DELETE"
+                    method: "DELETE",
                 })
-                .then(result => result.json())
-                .then(data => {
-                    if(data.deletedCount){
-                        setTasks(prev => prev.filter(task => task._id !== id));
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success",
-                        });
-                    }
-                })
+                    .then((result) => result.json())
+                    .then((data) => {
+                        if (data.deletedCount) {
+                            setTasks((prev) =>
+                                prev.filter((task) => task._id !== id)
+                            );
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                            });
+                        }
+                    });
             }
         });
     };
@@ -91,9 +94,39 @@ const MyPostedData = () => {
                                             </button>
                                         </td>
                                         <td>
-                                            <button className="btn btn-sm btn-primary text-white">
-                                                Bids
+                                            {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                            <button
+                                                className="btn btn-sm btn-primary"
+                                                onClick={() =>
+                                                    document
+                                                        .getElementById(
+                                                            `my_modal_${task._id}`
+                                                        )
+                                                        .showModal()
+                                                }>
+                                                See Bids Count
                                             </button>
+                                            <dialog
+                                                id={`my_modal_${task._id}`}
+                                                className="modal">
+                                                <div className="modal-box">
+                                                    <h3 className="font-bold text-lg">
+                                                        Bids Count
+                                                    </h3>
+                                                    <p className="py-4">
+                                                        Bids Count for this task
+                                                        is {task.bidCount}
+                                                    </p>
+                                                    <div className="modal-action">
+                                                        <form method="dialog">
+                                                            {/* if there is a button in form, it will close the modal */}
+                                                            <button className="btn">
+                                                                Close
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </dialog>
                                         </td>
                                     </tr>
                                 );

@@ -76,6 +76,7 @@ const Login = () => {
             .then((res) => {
                 const user = res.user;
                 setUser(user);
+                toast.success("User logged in successfully");
                 navigate(location.state ? `${location.state}` : "/");
             })
             .catch((error) => {

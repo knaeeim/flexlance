@@ -1,9 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Footer = () => {
+    
+    const { user } = use(AuthContext);
+
     return (
         <div>
             <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
@@ -30,7 +34,7 @@ const Footer = () => {
                     <Link to="/browseTasks" className="link link-hover">
                         Browse Task
                     </Link>
-                    <Link to="/myPostedTasks" className="link link-hover">
+                    <Link to={`/myPostedTasks/${user?.email}`} className="link link-hover">
                         My Post Task
                     </Link>
                 </nav>

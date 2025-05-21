@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUserAltSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
     const { user, userLogout } = use(AuthContext);
@@ -10,7 +11,7 @@ const Navbar = () => {
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);
-    }, [theme])
+    }, [theme]);
 
     const links = (
         <>
@@ -39,7 +40,7 @@ const Navbar = () => {
                         ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
                         : " mx-4 pb-1 px-2"
                 }>
-                Browse Task
+                Browse Tasks
             </NavLink>
             <NavLink
                 to={`/myPostedTasks/${user?.email}`}
@@ -48,7 +49,7 @@ const Navbar = () => {
                         ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
                         : "mx-4 pb-1 px-2"
                 }>
-                My Posted Task
+                My Posted Tasks
             </NavLink>
         </>
     );
@@ -65,16 +66,14 @@ const Navbar = () => {
 
     const handleLightandDarkMode = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-    }
+    };
 
     return (
         <div>
             <div className="flex md:px-10 px-2 md:pt-3 pt-1 pb-1 bg-base-300 shadow-sm">
                 <div className="navbar-start gap-2">
                     <div className="dropdown">
-                        <div
-                            tabIndex={0}
-                            className="lg:hidden">
+                        <div tabIndex={0} className="lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -112,7 +111,11 @@ const Navbar = () => {
                     <div>
                         <label className="swap swap-rotate">
                             {/* this hidden checkbox controls the state */}
-                            <input type="checkbox" checked={theme === "light"} onChange={handleLightandDarkMode}/>
+                            <input
+                                type="checkbox"
+                                checked={theme === "light"}
+                                onChange={handleLightandDarkMode}
+                            />
 
                             {/* sun icon */}
                             <svg
@@ -137,10 +140,19 @@ const Navbar = () => {
                                 <>
                                     <div className="avatar avatar-online">
                                         <div className="w-8 rounded-full border-2 border-green-500">
-                                            <img
-                                                className="object-center object-cover"
-                                                src={user.photoURL}
-                                            />
+                                            <button
+                                                data-tooltip-id="user-tooltip"
+                                                data-tooltip-content={
+                                                    user?.displayName
+                                                }
+                                                data-tooltip-place="left"
+                                                >
+                                                <img
+                                                    className="object-center object-cover"
+                                                    src={user.photoURL}
+                                                />
+                                            </button>
+                                            <Tooltip id="user-tooltip" />
                                         </div>
                                     </div>
                                 </>
