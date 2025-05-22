@@ -72,7 +72,7 @@ const BrowseTaskCard = ({ post }) => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Posted By</p>
 
-                                <p className="font-medium">{name}</p>
+                                <p className="font-medium">{name.split(" ", 2).join(" ")}</p>
                             </div>
                         </div>
                     </div>
