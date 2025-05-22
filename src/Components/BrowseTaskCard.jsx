@@ -44,7 +44,7 @@ const BrowseTaskCard = ({ post }) => {
                     </div>
 
                     <div className="mt-6 flex items-center justify-around gap-8 text-xs">
-                        <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                        <div className="sm:flex sm:shrink-1 sm:items-center sm:gap-2">
                             <FaSackDollar size={25} />
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Budget</p>
@@ -53,7 +53,7 @@ const BrowseTaskCard = ({ post }) => {
                             </div>
                         </div>
 
-                        <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                        <div className="sm:flex sm:shrink-1 sm:items-center sm:gap-2">
                             <MdOutlineDateRange size={28} />
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Deadline</p>
@@ -62,7 +62,7 @@ const BrowseTaskCard = ({ post }) => {
                             </div>
                         </div>
 
-                        <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                        <div className="sm:flex sm:shrink-1 sm:items-center sm:gap-2">
                             <div className="avatar">
                                 <div className="ring-primary ring-offset-base-100 w-5 rounded-full ring-2 ring-offset-2">
                                     <img src={userPhoto.photo} />
