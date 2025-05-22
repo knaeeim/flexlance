@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router";
 
 const BrowseTaskCard = ({ post }) => {
-    console.log(post);
+    // console.log(post);
     const { _id, email, title, category, date, budget, cover, name } = post;
     const [userPhoto, setUserPhoto] = useState([]);
 
@@ -18,8 +18,8 @@ const BrowseTaskCard = ({ post }) => {
     }, [email]);
 
     return (
-        <div>
-            <div className="block rounded-lg p-4 shadow-xs shadow-indigo-100">
+        <div className="">
+            <div className="block rounded-lg p-4 shadow-xs shadow-indigo-100 border-2">
                 <img
                     alt=""
                     src={cover}

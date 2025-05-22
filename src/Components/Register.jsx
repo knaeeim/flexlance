@@ -8,7 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingPage from "../Pages/LoadingPage";
 
 const Register = () => {
-    const { createUser, setUser, profileDataUpdate, googleSignIn, loading } =
+    const { createUser, setUser, profileDataUpdate, googleSignIn, loading, setLoading } =
         use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -36,7 +36,7 @@ const Register = () => {
             return;
         }
 
-        console.log(rest);
+        // console.log(rest);
         // create user
         createUser(email, password)
             .then((res) => {
@@ -91,7 +91,7 @@ const Register = () => {
                     photo: user.photoURL,
                 };
 
-                console.log(userData);
+                // console.log(userData);
 
                 // checking that user already exists in database
                 fetch(`https://flexlance.vercel.app/users/${user.email}`)
@@ -125,6 +125,7 @@ const Register = () => {
                     });
             })
             .catch((error) => {
+                setLoading(false);
                 toast.error(error.message);
             });
     };

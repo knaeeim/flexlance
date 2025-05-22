@@ -7,10 +7,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingPage from "../Pages/LoadingPage";
 
 const Login = () => {
-    const { googleSignIn, setUser, emailLogIn, loading } = use(AuthContext);
+    const { googleSignIn, setUser, emailLogIn, loading, setLoading } = use(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [showPassword, setShowPassword] = useState(false);
+
+    // console.log(location);
 
     if(loading){
         return <LoadingPage></LoadingPage>
@@ -31,12 +33,12 @@ const Login = () => {
                     photo: user.photoURL,
                 };
 
-                console.log(userData);
+                // console.log(userData);
 
                 // checking that user already exists in database
                 fetch(`https://flexlance.vercel.app/users/${user.email}`)
                     .then((result) => {
-                        console.log(result);
+                        // console.log(result);
                         // user data send in database
                         if (result.status == 404) {
                             fetch("https://flexlance.vercel.app/users", {
@@ -57,6 +59,7 @@ const Login = () => {
                                 });
                         } else if (result.ok) {
                             toast.success("User logged in successfully");
+                            navigate(location.state ? `${location.state}` : "/");
                         } else {
                             toast.error("Server error while checking user.");
                         }
@@ -66,6 +69,7 @@ const Login = () => {
                     });
             })
             .catch((error) => {
+                setLoading(false);
                 toast.error(error.message);
             });
     };

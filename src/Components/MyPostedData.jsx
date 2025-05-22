@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const MyPostedData = () => {
     const { user } = use(AuthContext);
     const userPostedTask = useLoaderData();
-    console.log(userPostedTask);
+    // console.log(userPostedTask);
     const [tasks, setTasks] = useState(userPostedTask);
 
     const handleDelete = (id) => {

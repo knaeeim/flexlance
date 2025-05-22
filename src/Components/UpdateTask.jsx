@@ -35,7 +35,7 @@ const UpdateTask = () => {
         const formData = new FormData(form);
         const obj = Object.fromEntries(formData.entries());
         const taskObj = { email: user.email, name: user.displayName, ...obj };
-        console.log(taskObj);
+        // console.log(taskObj);
 
         // send data to database
         fetch(`https://flexlance.vercel.app/updateData/${_id}`, {
@@ -47,7 +47,7 @@ const UpdateTask = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.modifiedCount) {
                     toast.success("Task Updated successfully");
                     navigate(`/myPostedTasks/${user.email}`);

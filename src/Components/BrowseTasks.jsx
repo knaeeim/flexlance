@@ -4,7 +4,7 @@ import BrowseTaskCard from './BrowseTaskCard';
 
 const BrowseTasks = () => {
     const allPost = useLoaderData();
-    console.log(allPost);
+    // console.log(allPost);
     return (
         <div className='max-w-7xl mx-auto mb-20'>
             <div className='mb-8'>
