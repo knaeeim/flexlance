@@ -51,6 +51,7 @@ const Login = () => {
                                 .then((res) => res.json())
                                 .then((data) => {
                                     if (data.insertedId) {
+                                        setLoading(false)
                                         toast.success(
                                             "User created successfully"
                                         );
@@ -58,6 +59,7 @@ const Login = () => {
                                     }
                                 });
                         } else if (result.ok) {
+                            setLoading(false)
                             toast.success("User logged in successfully");
                             navigate(location.state ? `${location.state}` : "/");
                         } else {
