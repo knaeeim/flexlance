@@ -68,3 +68,9 @@
   border-left: none;
   border-top: none;
 }
+
+@media screen and (max-width: 768px) {
+  .focus-word {
+    font-size: 2rem;
+  }
+}
