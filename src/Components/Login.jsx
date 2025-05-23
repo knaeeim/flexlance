@@ -91,6 +91,7 @@ const Login = () => {
                 navigate(location.state ? `${location.state}` : "/");
             })
             .catch((error) => {
+                setLoading(false);
                 toast.error(error.message);
             });
     };
@@ -131,6 +132,7 @@ const Login = () => {
                                 type="email"
                                 className="w-full py-2 px-4 border-2 border-gray-400 rounded-2xl focus:outline-none focus:border-double focus:border-[#123458]"
                                 placeholder="Email"
+                                required
                             />
                         </div>
 
