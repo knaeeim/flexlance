@@ -63,11 +63,12 @@ const AddTask = () => {
                             type="text"
                             className="input w-full"
                             placeholder="Enter your title Here"
+                            required
                         />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="fieldset-legend">Category</label>
-                        <select className="input w-full" name="category">
+                        <select className="input w-full" name="category" required>
                             <option disabled={true} selected>
                                 Choose Your Task Category
                             </option>
@@ -90,6 +91,7 @@ const AddTask = () => {
                             type="text"
                             className="input w-full"
                             placeholder="Enter your Task Description"
+                            required
                         />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -99,6 +101,7 @@ const AddTask = () => {
                             className="w-full input"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
+                            required
                         />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -108,6 +111,7 @@ const AddTask = () => {
                             type="text"
                             className="input w-full"
                             placeholder="Enter your Estimated Budget"
+                            required
                         />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -137,6 +141,7 @@ const AddTask = () => {
                             type="text"
                             className="input w-full"
                             placeholder="Enter Your Image Url"
+                            required
                         />
                     </fieldset>
                 </div>

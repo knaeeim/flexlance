@@ -52,6 +52,9 @@ const UpdateTask = () => {
                     toast.success("Task Updated successfully");
                     navigate(`/myPostedTasks/${user.email}`);
                 }
+                else{
+                    toast.error("Please make some changes to update the task");
+                }
             });
     };
 
