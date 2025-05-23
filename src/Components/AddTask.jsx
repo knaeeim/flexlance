@@ -18,15 +18,15 @@ const AddTask = () => {
         const taskObj = { email: user.email, name:user.displayName, ...obj };
         taskObj.bidCount = 0;
 
-        const selectedDate = new Date(startDate);
-        const today = new Date();
+        // const selectedDate = new Date(startDate);
+        // const today = new Date();
 
-        selectedDate.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
+        // selectedDate.setHours(0, 0, 0, 0);
+        // today.setHours(0, 0, 0, 0);
 
-        if(selectedDate < today){
-            return toast.error("Date can't be in the past");
-        }
+        // if(selectedDate < today){
+        //     return toast.error("Date can't be in the past");
+        // }
 
         // send data to database
         fetch("https://flexlance.vercel.app/addTask", {

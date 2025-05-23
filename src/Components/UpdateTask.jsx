@@ -18,15 +18,15 @@ const UpdateTask = () => {
         return <CustomError></CustomError>;
     }
 
-    const selectedDate = new Date(startDate);
-    const today = new Date();
+    // const selectedDate = new Date(startDate);
+    // const today = new Date();
 
-    selectedDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
+    // selectedDate.setHours(0, 0, 0, 0);
+    // today.setHours(0, 0, 0, 0);
 
-    if (selectedDate < today) {
-        return toast.error("Date can't be in the past");
-    }
+    // if (selectedDate < today) {
+    //     return toast.error("Date can't be in the past");
+    // }
 
     const handleUpdateTask = (e) => {
         e.preventDefault();
