@@ -75,6 +75,7 @@ const Register = () => {
                     });
             })
             .catch((error) => {
+                setLoading(false);
                 toast.error(error.message);
             });
     };
@@ -109,18 +110,21 @@ const Register = () => {
                                 .then((res) => res.json())
                                 .then((data) => {
                                     if (data.insertedId) {
+                                        setLoading(false)
                                         toast.success(
                                             "User has been created successfully"
                                         );
                                     }
                                 });
                         } else if (result.ok) {
+                            setLoading(false);
                             toast.success("User logged in successfully");
                         } else {
                             toast.error("Server error while checking user.");
                         }
                     })
                     .catch((error) => {
+                        setLoading(false);
                         toast.error(error.message);
                     });
             })
