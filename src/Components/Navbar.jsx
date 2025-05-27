@@ -97,14 +97,14 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="text-xl flex items-center gap-2">
+                    <Link to='/' className="text-xl flex items-center gap-2">
                         <img
                             className="md:w-7 md:h-7 w-5 h-5"
                             src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"
                             alt=""
                         />
                         <span className="hidden md:block">Flexlance</span>
-                    </a>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">{links}</ul>
