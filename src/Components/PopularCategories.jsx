@@ -55,7 +55,7 @@ const PopularCategories = () => {
             <div className="grid gap-6 grid-cols-2 md:grid-cols-4">
                 {categories.map((cat, idx) => (
                     <Link
-                        to={`/category-details/category=${encodeURIComponent(cat.name)}`}
+                        to={`/category-details/${encodeURIComponent(cat.name)}`}
                         key={idx}
                         className="bg-base-300 rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center text-center">
                         <div className="mb-4">{cat.icon}</div>

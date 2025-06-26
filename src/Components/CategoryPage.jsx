@@ -26,7 +26,7 @@ const CategoryPage = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center h-[200px] flex justify-center items-center w-full text-4xl text-gray-500">
+                    <div className="text-center h-[300px] flex justify-center items-center w-full text-4xl text-gray-500">
                         No tasks available in this category.
                     </div>
                 )}

@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
                 loader: ({ params }) =>{
                     console.log(params);
                     return fetch(
-                        `https://flexlance.vercel.app/category?${params.category}`
+                        `https://flexlance.vercel.app/category?category=${params.category}`
                     );
                 }
             },
