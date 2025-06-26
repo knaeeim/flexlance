@@ -6,7 +6,7 @@ const BrowseTasks = () => {
     const allPost = useLoaderData();
     // console.log(allPost);
     return (
-        <div className='max-w-7xl mx-auto mb-20'>
+        <div className='max-w-[90%] mx-auto mb-20'>
             <div className='mb-8'>
                 <h1 className='text-3xl font-bold text-center my-5'>Browse All Tasks</h1>
                 <p className='text-center text-gray-500'>Find the perfect task for you from our extensive list of available tasks.</p>

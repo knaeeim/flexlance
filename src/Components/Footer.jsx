@@ -9,8 +9,8 @@ const Footer = () => {
     const { user } = use(AuthContext);
 
     return (
-        <div>
-            <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
+        <div data-aos="zoom-in-up" className="bg-base-300">
+            <footer className="footer sm:footer-horizontal text-base-content py-10 md:px-0 px-5 max-w-[90%] mx-auto">
                 <aside>
                     <img
                         src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const MyPostedData = () => {
     const { user } = use(AuthContext);
     const userPostedTask = useLoaderData();
+
     // console.log(userPostedTask);
     const [tasks, setTasks] = useState(userPostedTask);
 
@@ -42,17 +43,18 @@ const MyPostedData = () => {
     };
 
     return (
-        <div>
+        <div data-aos="zoom-in-up" className="w-full px-4 sm:px-10">
             <div className="text-center mt-10">
                 <h1 className="text-2xl font-bold">
                     {user.displayName}'s Posted Tasks..
                 </h1>
             </div>
+
             {tasks.length > 0 ? (
-                <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 my-10">
+                <div className="overflow-x-auto rounded-box border border-base-content/10 bg-base-100 my-10 shadow-md">
                     <table className="table">
                         {/* head */}
-                        <thead>
+                        <thead className="bg-neutral-200 text-base font-semibold text-base-content">
                             <tr>
                                 <th>Serial</th>
                                 <th>Task Title</th>
@@ -63,74 +65,77 @@ const MyPostedData = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {tasks.map((task, index) => {
-                                return (
-                                    <tr key={task._id} className="font-bold">
-                                        <th>{index + 1}</th>
-                                        <td>
-                                            {task.title.split(" ", 6).join(" ")}
-                                        </td>
-                                        <td>{task.category}</td>
-                                        <td className="">
-                                            <span className="flex items-center gap-2 font-bold">
-                                                <FaCalendarDay /> {task.date}
-                                            </span>{" "}
-                                            <span className="font-bold">
+                            {tasks.map((task, index) => (
+                                <tr
+                                    key={task._id}
+                                    className="hover:bg-base-300/20">
+                                    <td>{index + 1}</td>
+                                    <td className="max-w-[140px] sm:max-w-[200px] truncate">
+                                        {task.title.split(" ", 6).join(" ")}
+                                    </td>
+                                    <td>{task.category}</td>
+                                    <td>
+                                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                            <span className="inline-flex items-center gap-1">
+                                                <FaCalendarDay className="text-base-content/70" />
+                                                {task.date}
+                                            </span>
+                                            <span className="text-primary font-semibold">
                                                 ${task.budget}
                                             </span>
-                                        </td>
-                                        <td className="flex gap-2">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="flex flex-wrap gap-2">
                                             <Link
-                                                to={`/updatedPost/${task._id}`}
-                                                className="btn btn-sm btn-primary">
+                                                to={`/dashboard/updatedPost/${task._id}`}
+                                                className="btn btn-xs sm:btn-sm btn-primary">
                                                 Edit
                                             </Link>
                                             <button
                                                 onClick={() =>
                                                     handleDelete(task._id)
                                                 }
-                                                className="btn btn-sm btn-warning">
+                                                className="btn btn-xs sm:btn-sm btn-error">
                                                 Delete
                                             </button>
-                                        </td>
-                                        <td>
-                                            {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                            <button
-                                                className="btn btn-sm btn-primary"
-                                                onClick={() =>
-                                                    document
-                                                        .getElementById(
-                                                            `my_modal_${task._id}`
-                                                        )
-                                                        .showModal()
-                                                }>
-                                                See Bids Count
-                                            </button>
-                                            <dialog
-                                                id={`my_modal_${task._id}`}
-                                                className="modal">
-                                                <div className="modal-box">
-                                                    <h3 className="font-bold text-lg">
-                                                        Bids Count
-                                                    </h3>
-                                                    <p className="py-4">
-                                                        Bids Count for this task
-                                                        is {task.bidCount}
-                                                    </p>
-                                                    <div className="modal-action">
-                                                        <form method="dialog">
-                                                            {/* if there is a button in form, it will close the modal */}
-                                                            <button className="btn">
-                                                                Close
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="btn btn-xs sm:btn-sm btn-outline"
+                                            onClick={() =>
+                                                document
+                                                    .getElementById(
+                                                        `my_modal_${task._id}`
+                                                    )
+                                                    .showModal()
+                                            }>
+                                            See Bids
+                                        </button>
+                                        <dialog
+                                            id={`my_modal_${task._id}`}
+                                            className="modal">
+                                            <div className="modal-box">
+                                                <h3 className="font-bold text-lg">
+                                                    Bids Count
+                                                </h3>
+                                                <p className="py-4">
+                                                    Bids Count for this task is{" "}
+                                                    {task.bidCount}
+                                                </p>
+                                                <div className="modal-action">
+                                                    <form method="dialog">
+                                                        <button className="btn">
+                                                            Close
+                                                        </button>
+                                                    </form>
                                                 </div>
-                                            </dialog>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
+                                            </div>
+                                        </dialog>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

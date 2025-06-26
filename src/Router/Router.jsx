@@ -11,6 +11,9 @@ import MyPostedData from "../Components/MyPostedData";
 import BrowseTaskDetails from "../Components/BrowseTaskDetails";
 import LoadingPage from "../Pages/LoadingPage";
 import UpdateTask from "../Components/UpdateTask";
+import DashBoardLayOut from "../LayOut/DashBoardLayOut";
+import DashBoard from "../Components/DashBoard";
+import CategoryPage from "../Components/CategoryPage";
 
 export const router = createBrowserRouter([
     {
@@ -20,45 +23,26 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: () => fetch('https://flexlance.vercel.app/allData'),
+                loader: () => fetch("https://flexlance.vercel.app/allData"),
                 hydrateFallbackElement: <LoadingPage></LoadingPage>,
                 element: <Home></Home>,
-            },
-            {
-                path: "/addTask",
-                element: <PrivateRoutes>
-                    <AddTask></AddTask>
-                </PrivateRoutes>,
             },
             {
                 path: "/browseTasks",
                 loader: () => fetch("https://flexlance.vercel.app/allData"),
                 hydrateFallbackElement: <LoadingPage></LoadingPage>,
-                element: <BrowseTasks></BrowseTasks>
+                element: <BrowseTasks></BrowseTasks>,
             },
             {
                 path: "/browseTasks/:id",
-                loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
+                loader: ({ params }) =>
+                    fetch(`https://flexlance.vercel.app/allData/${params.id}`),
                 hydrateFallbackElement: <LoadingPage></LoadingPage>,
-                element: <PrivateRoutes>
-                    <BrowseTaskDetails></BrowseTaskDetails>
-                </PrivateRoutes>
-            },
-            {
-                path: "/myPostedTasks/:email",
-                loader: ({params}) => fetch(`https://flexlance.vercel.app/alldatabyemail/${params.email}`),
-                hydrateFallbackElement: <LoadingPage></LoadingPage>,
-                element: <PrivateRoutes>
-                    <MyPostedData></MyPostedData>
-                </PrivateRoutes>,
-            },
-            {
-                path: "/updatedPost/:id",
-                loader: ({ params }) => fetch(`https://flexlance.vercel.app/allData/${params.id}`),
-                hydrateFallbackElement: <LoadingPage></LoadingPage>,
-                element: <PrivateRoutes>
-                    <UpdateTask></UpdateTask>
-                </PrivateRoutes>
+                element: (
+                    <PrivateRoutes>
+                        <BrowseTaskDetails></BrowseTaskDetails>
+                    </PrivateRoutes>
+                ),
             },
             {
                 path: "/auth/login",
@@ -66,12 +50,68 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/auth/register",
-                element: <Register></Register> 
-            }
+                element: <Register></Register>,
+            },
+            {
+                path: "/category-details/:category",
+                element: <CategoryPage></CategoryPage>,
+                loader: ({ params }) =>{
+                    console.log(params);
+                    return fetch(
+                        `https://flexlance.vercel.app/category?${params.category}`
+                    );
+                }
+            },
         ],
     },
     {
         path: "*",
         element: <ErrorPage></ErrorPage>,
-    }
+    },
+    {
+        path: "/dashboard",
+        element: (
+            <PrivateRoutes>
+                <DashBoardLayOut />
+            </PrivateRoutes>
+        ),
+        children: [
+            {
+                index: true,
+                element: <DashBoard />,
+            },
+            {
+                path: "myPostedTasks/:email",
+                loader: ({ params }) =>
+                    fetch(
+                        `https://flexlance.vercel.app/alldatabyemail/${params.email}`
+                    ),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
+                element: (
+                    <PrivateRoutes>
+                        <MyPostedData></MyPostedData>
+                    </PrivateRoutes>
+                ),
+            },
+            {
+                path: "updatedPost/:id",
+                loader: ({ params }) =>
+                    fetch(`https://flexlance.vercel.app/allData/${params.id}`),
+                hydrateFallbackElement: <LoadingPage></LoadingPage>,
+                element: (
+                    <PrivateRoutes>
+                        <UpdateTask></UpdateTask>
+                    </PrivateRoutes>
+                ),
+            },
+            {
+                path: "addTask",
+                element: (
+                    <PrivateRoutes>
+                        <AddTask></AddTask>
+                    </PrivateRoutes>
+                ),
+            },
+        ],
+    },
 ]);

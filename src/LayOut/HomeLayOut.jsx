@@ -7,7 +7,9 @@ const HomeLayOut = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className='md:px-0 px-3'>
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );

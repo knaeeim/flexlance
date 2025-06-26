@@ -8,6 +8,7 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [bidCountGlobal, setBidCountGlobal] = useState(0);
+    const [theme, setTheme] = useState("light");
 
     // console.log("User from Auth Provider", user);
 
@@ -66,6 +67,8 @@ const AuthProvider = ({children}) => {
         emailLogIn,
         bidCountGlobal,
         setBidCountGlobal,
+        theme, 
+        setTheme,
     }
 
     return (

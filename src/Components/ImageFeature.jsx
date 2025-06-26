@@ -65,7 +65,7 @@ const ImageFeature = () => {
     ];
 
     return (
-        <div className="my-20">
+        <div className="my-20 md:h-[600px] h-[300px] rounded-2xl overflow-hidden">
             <GridMotion items={items}></GridMotion>
         </div>
     );

@@ -15,7 +15,7 @@ const Banner = () => {
         "https://i.ibb.co/Lz9qKHNh/slide-3.jpg",
     ];
     return (
-        <div className="mb-10">
+        <div data-aos="zoom-in-up" className="my-5 rounded-2xl overflow-hidden">
             <Swiper
                 modules={[Navigation, Pagination, A11y, Autoplay]}
                 spaceBetween={50}

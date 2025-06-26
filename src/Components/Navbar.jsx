@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUserAltSlash } from "react-icons/fa";
@@ -8,11 +8,11 @@ import { IoMoonOutline } from "react-icons/io5";
 import { GoSun } from "react-icons/go";
 
 const Navbar = () => {
-    const { user, userLogout } = use(AuthContext);
-    const [theme, setTheme] = useState("light");
+    const { user, userLogout, theme, setTheme } = use(AuthContext);
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
+        const localTheme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", localTheme);
     }, [theme]);
 
     const links = (
@@ -27,15 +27,6 @@ const Navbar = () => {
                 Home
             </NavLink>
             <NavLink
-                to="/addTask"
-                className={({ isActive }) =>
-                    isActive
-                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
-                        : "mx-4 pb-1 px-2"
-                }>
-                Add Task
-            </NavLink>
-            <NavLink
                 to="/browseTasks"
                 className={({ isActive }) =>
                     isActive
@@ -43,15 +34,6 @@ const Navbar = () => {
                         : " mx-4 pb-1 px-2"
                 }>
                 Browse Tasks
-            </NavLink>
-            <NavLink
-                to={`/myPostedTasks/${user?.email}`}
-                className={({ isActive }) =>
-                    isActive
-                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
-                        : "mx-4 pb-1 px-2"
-                }>
-                My Posted Tasks
             </NavLink>
         </>
     );
@@ -68,11 +50,12 @@ const Navbar = () => {
 
     const handleLightandDarkMode = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+        localStorage.setItem("theme", theme);
     };
 
     return (
         <div>
-            <div className="flex md:px-10 px-2 pt-2 pb-1 bg-base-300 shadow-sm items-center">
+            <div className="flex md:px-20 px-8 pt-2 pb-1 bg-base-300 shadow-sm items-center">
                 <div className="navbar-start gap-2">
                     <div className="dropdown">
                         <div tabIndex={0} className="lg:hidden">
@@ -159,6 +142,11 @@ const Navbar = () => {
                                 </>
                             )}
                             <Link
+                                to="/dashboard"
+                                className="btn md:btn-sm btn-xs bg-[#123458] hover:bg-red-500 text-white">
+                                DashBoard
+                            </Link>
+                            <Link
                                 onClick={handleUserLogOut}
                                 to="/auth/login"
                                 className="btn md:btn-sm btn-xs bg-[#123458] hover:bg-red-500 text-white">
@@ -169,7 +157,7 @@ const Navbar = () => {
                         <>
                             <Link
                                 to="/auth/login"
-                                className="btn btn-sm bg-[#D4C9BE]">
+                                className="btn btn-sm btn-outline">
                                 Login
                             </Link>
                             <Link

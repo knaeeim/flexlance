@@ -45,7 +45,7 @@ const BrowseTaskDetails = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div data-aos="zoom-in-up" className="max-w-[90%] mx-auto px-4 py-12">
             {/* Header */}
             <div className="text-center mb-8">
                 <h1 className="text-xl mb-3 font-bold">

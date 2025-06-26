@@ -10,17 +10,16 @@ const FeaturedTasks = () => {
     
 
     return (
-        <div className="md:my-20 my-10 md:px-10 px-5">
-            <div className="my-10">
-                <TrueFocus
-                    sentence="Featured Posts"
-                    manualMode={false}
-                    blurAmount={5}
-                    borderColor="gray"
-                    animationDuration={2}
-                    pauseBetweenAnimations={1}
-                />
+        <div data-aos="zoom-in-up" className="md:my-20 my-10">
+            <div className="text-center space-y-4 md:w-10/12 w-full mx-auto mb-4">
+                <h1 className="text-3xl font-bold">
+                    Featured Posts 
+                </h1>
+                <p className="md:text-lg text-xs max-w-[70%] mx-auto">
+                    Explore our featured tasks, handpicked to help you find the perfect opportunity. Whether you're a freelancer or a client, these posts are designed to connect you with the right projects and talents.
+                </p>
             </div>
+            
             <div>
                 {
                     featuredTasks.length > 0 ? (
