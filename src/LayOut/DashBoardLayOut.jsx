@@ -113,7 +113,7 @@ const DashBoardLayOut = () => {
                     <div className="mx-2 flex-1 px-2">User DashBoard</div>
                 </div>
                 {/* Page content here */}
-                <div className="w-full pt-10 bg-base-200 rounded-2xl">
+                <div className="w-full min-h-screen pt-10 bg-base-200 rounded-2xl">
                     <Outlet></Outlet>
                 </div>
             </div>

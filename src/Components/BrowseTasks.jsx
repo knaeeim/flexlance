@@ -42,10 +42,10 @@ const BrowseTasks = () => {
                     available tasks.
                 </p>
             </div>
-            <div className="flex justify-end items-center mb-10">
-                <select onChange={handleSorting} defaultValue="Choose Sorting Style" className="w-2/12 py-2 px-4 rounded-2xl border-2">
-                    <option disabled={true}>Choose Sorting Style</option>
-                    <option>A to Z</option>
+            <div className="flex justify-end items-center mb-10 ">
+                <select onChange={handleSorting} defaultValue="Choose Sorting Style" className="w-2/12 py-2 px-4 rounded-2xl border-2 bg-base-100 text-base-content">
+                    <option disabled={true} className="text-gray-400">Choose Sorting Style</option>
+                    <option >A to Z</option>
                     <option>Z to A</option>
                     <option>Budget High to Low</option>
                     <option>Budget Low to High</option>
