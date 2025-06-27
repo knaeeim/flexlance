@@ -24,18 +24,12 @@ const Footer = () => {
                     </p>
                 </aside>
                 <nav>
-                    <h6 className="footer-title">Services</h6>
+                    <h6 className="footer-title">Visit</h6>
                     <Link to="/" className="link link-hover">
                         Home
                     </Link>
-                    <Link to="/addTask" className="link link-hover">
-                        Add Task
-                    </Link>
-                    <Link to="/browseTasks" className="link link-hover">
-                        Browse Task
-                    </Link>
-                    <Link to={`/myPostedTasks/${user?.email}`} className="link link-hover">
-                        My Post Task
+                    <Link to="/about-us" className="link link-hover">
+                        About Us
                     </Link>
                 </nav>
                 <nav>

@@ -24,7 +24,7 @@ const FeaturedTasks = () => {
                 {
                     featuredTasks.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            {featuredTasks.map((post) => <BrowseTaskCard post={post}></BrowseTaskCard>)}
+                            {featuredTasks.map((post) => <BrowseTaskCard key={post._id} post={post}></BrowseTaskCard>)}
                         </div>
                     ) : " "
                 }

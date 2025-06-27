@@ -14,6 +14,8 @@ import UpdateTask from "../Components/UpdateTask";
 import DashBoardLayOut from "../LayOut/DashBoardLayOut";
 import DashBoard from "../Components/DashBoard";
 import CategoryPage from "../Components/CategoryPage";
+import UpdateProfile from "../Components/UpdateProfile";
+import AboutUs from "../Components/AboutUs";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
                     );
                 }
             },
+            {
+                path: "/about-us",
+                element: <AboutUs></AboutUs>
+            }
         ],
     },
     {
@@ -112,6 +118,12 @@ export const router = createBrowserRouter([
                     </PrivateRoutes>
                 ),
             },
+            {
+                path:"update-profile",
+                element: <PrivateRoutes>
+                    <UpdateProfile></UpdateProfile>
+                </PrivateRoutes> 
+            }
         ],
     },
 ]);

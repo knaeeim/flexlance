@@ -50,7 +50,7 @@ const UpdateTask = () => {
                 // console.log(data);
                 if (data.modifiedCount) {
                     toast.success("Task Updated successfully");
-                    navigate(`/myPostedTasks/${user.email}`);
+                    navigate(`/dashboard/myPostedTasks/${user.email}`);
                 }
                 else{
                     toast.error("Please make some changes to update the task");

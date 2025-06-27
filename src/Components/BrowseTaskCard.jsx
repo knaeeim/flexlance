@@ -81,7 +81,7 @@ const BrowseTaskCard = ({ post }) => {
                 <div className="flex justify-center items-center mt-4">
                     <Link
                         to={`/browseTasks/${_id}`}
-                        className="btn btn-primary w-full">
+                        className="btn bg-slate-600 text-white w-full">
                         View Details
                     </Link>
                 </div>

@@ -1,10 +1,17 @@
 import React, { use, useEffect } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-import { FaHome, FaPlus, FaTasks } from "react-icons/fa";
+import {
+    FaHome,
+    FaPlus,
+    FaTasks,
+    FaUserEdit,
+    FaSignOutAlt,
+} from "react-icons/fa";
 
 const DashBoardLayOut = () => {
-    const { user, theme } = use(AuthContext);
+    const { user, theme, userLogout } = use(AuthContext);
+    const location = useLocation();
 
     useEffect(() => {
         const localTheme = localStorage.getItem("theme");
@@ -12,47 +19,75 @@ const DashBoardLayOut = () => {
     }, [theme]);
 
     const dashBoardLink = (
-        <>
-            <li>
-                <Link
-                    to="/dashboard"
-                    className={({ isActive }) =>
-                        isActive
-                            ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2 flex items-center gap-2"
-                            : "mx-4 pb-1 px-2 flex items-center gap-2"
-                    }>
-                    <FaHome className="text-sm" />
-                    DashBoard Home
-                </Link>
-            </li>
-            <li>
-                <Link
-                    to="/dashboard/addTask"
-                    className={({ isActive }) =>
-                        isActive
-                            ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2 flex items-center gap-2"
-                            : "mx-4 pb-1 px-2 flex items-center gap-2"
-                    }>
-                    <FaPlus className="text-sm" />
-                    Add Task
-                </Link>
-            </li>
-            <li>
-                <Link
-                    to={`/dashboard/myPostedTasks/${user?.email}`}
-                    className={({ isActive }) =>
-                        isActive
-                            ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2 flex items-center gap-2"
-                            : "mx-4 pb-1 px-2 flex items-center gap-2"
-                    }>
-                    <FaTasks className="text-sm" />
-                    My Posted Tasks
-                </Link>
-            </li>
-        </>
+        <div className="flex flex-col justify-between min-h-[calc(100vh-150px)]">
+            <div className="justify-start space-y-6">
+                <li>
+                    <Link
+                        to={"/dashboard"}
+                        className={
+                            location.pathname === "/dashboard"
+                                ? "bg-slate-400 pb-1 mx-4 px-2 flex items-center gap-2"
+                                : "mx-4 pb-1 px-2 flex items-center gap-2"
+                        }>
+                        <FaHome className="text-sm" />
+                        DashBoard Home
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/dashboard/addTask"
+                        className={
+                            location.pathname === "/dashboard/addTask"
+                                ? "bg-slate-400 pb-1 mx-4 px-2 flex items-center gap-2"
+                                : "mx-4 pb-1 px-2 flex items-center gap-2"
+                        }>
+                        <FaPlus className="text-sm" />
+                        Add Task
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to={`/dashboard/myPostedTasks/${user?.email}`}
+                        className={
+                            location.pathname ===
+                            `/dashboard/myPostedTasks/${user?.email}`
+                                ? "bg-slate-400 pb-1 mx-4 px-2 flex items-center gap-2"
+                                : "mx-4 pb-1 px-2 flex items-center gap-2"
+                        }>
+                        <FaTasks className="text-sm" />
+                        My Posted Tasks
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to={"/dashboard/update-profile"}
+                        className={
+                            location.pathname === "/dashboard/update-profile"
+                                ? "bg-slate-400 pb-1 mx-4 px-2 flex items-center gap-2"
+                                : "mx-4 pb-1 px-2 flex items-center gap-2"
+                        }>
+                        <FaUserEdit className="text-sm" />
+                        Update Profile
+                    </Link>
+                </li>
+            </div>
+            <div className="">
+                <li>
+                    <button
+                        onClick={async() => await userLogout()}
+                        className="mx-4 pb-1 px-2 flex items-center gap-2 text-red-500 hover:text-red-700"
+                    >
+                        <FaSignOutAlt className="text-sm" />
+                        Log Out
+                    </button>
+                </li>
+            </div>
+        </div>
     );
     return (
-        <div data-aos="zoom-in-up" className="drawer lg:drawer-open max-w-[90%] mx-auto">
+        <div
+            data-aos="zoom-in-up"
+            className="drawer lg:drawer-open md:max-w-[90%] mx-auto">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center">
                 {/* Navbar */}
@@ -78,7 +113,7 @@ const DashBoardLayOut = () => {
                     <div className="mx-2 flex-1 px-2">User DashBoard</div>
                 </div>
                 {/* Page content here */}
-                <div className="w-full mt-10">
+                <div className="w-full pt-10 bg-base-200 rounded-2xl">
                     <Outlet></Outlet>
                 </div>
             </div>
@@ -87,8 +122,10 @@ const DashBoardLayOut = () => {
                     htmlFor="my-drawer-2"
                     aria-label="close sidebar"
                     className="drawer-overlay"></label>
-                <ul className="menu bg-base-300 text-base-content min-h-screen w-80 shadow-2xl p-4">
-                    <Link to="/" className="w-full flex items-center ml-3 mb-4">
+                <ul className="menu bg-base-300 text-base-content min-h-screen w-80 shadow-2xl p-4 rounded-2xl">
+                    <Link
+                        to="/"
+                        className="w-full flex items-center ml-3 mb-10">
                         <img
                             src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"
                             alt=""

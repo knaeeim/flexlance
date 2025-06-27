@@ -54,7 +54,7 @@ const MyPostedData = () => {
                 <div className="overflow-x-auto rounded-box border border-base-content/10 bg-base-100 my-10 shadow-md">
                     <table className="table">
                         {/* head */}
-                        <thead className="bg-neutral-200 text-base font-semibold text-base-content">
+                        <thead className="bg-base-300 shadow-md text-base font-semibold text-base-content">
                             <tr>
                                 <th>Serial</th>
                                 <th>Task Title</th>

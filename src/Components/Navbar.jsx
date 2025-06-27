@@ -21,7 +21,7 @@ const Navbar = () => {
                 to="/"
                 className={({ isActive }) =>
                     isActive
-                        ? "border-b-2 border-zinc-400 pb-1 px-2 mx-4 font-bold"
+                        ? "border-b-2 border-teal-500 pb-1 px-2 mx-4 font-bold"
                         : "mx-4 pb-1 px-2"
                 }>
                 Home
@@ -30,10 +30,19 @@ const Navbar = () => {
                 to="/browseTasks"
                 className={({ isActive }) =>
                     isActive
-                        ? "border-b-2 border-zinc-400 pb-1 mx-4 px-2"
+                        ? "border-b-2 border-teal-500 pb-1 mx-4 px-2"
                         : " mx-4 pb-1 px-2"
                 }>
                 Browse Tasks
+            </NavLink>
+            <NavLink
+                to="/about-us"
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-2 border-teal-500 pb-1 mx-4 px-2"
+                        : " mx-4 pb-1 px-2"
+                }>
+                About Us
             </NavLink>
         </>
     );
@@ -54,7 +63,7 @@ const Navbar = () => {
     };
 
     return (
-        <div>
+        <div className="sticky top-0 z-50">
             <div className="flex md:px-20 px-8 pt-2 pb-1 bg-base-300 shadow-sm items-center">
                 <div className="navbar-start gap-2">
                     <div className="dropdown">
@@ -80,7 +89,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <Link to='/' className="text-xl flex items-center gap-2">
+                    <Link to="/" className="text-xl flex items-center gap-2">
                         <img
                             className="md:w-7 md:h-7 w-5 h-5"
                             src="https://i.ibb.co/DHGHcHRn/flexlance-logo.png"
@@ -129,8 +138,7 @@ const Navbar = () => {
                                                 data-tooltip-content={
                                                     user?.displayName
                                                 }
-                                                data-tooltip-place="left"
-                                                >
+                                                data-tooltip-place="left">
                                                 <img
                                                     className="object-center object-cover"
                                                     src={user.photoURL}
@@ -143,13 +151,13 @@ const Navbar = () => {
                             )}
                             <Link
                                 to="/dashboard"
-                                className="btn md:btn-sm btn-xs bg-[#123458] hover:bg-red-500 text-white">
+                                className="btn md:btn-sm btn-xs bg-slate-400">
                                 DashBoard
                             </Link>
                             <Link
                                 onClick={handleUserLogOut}
                                 to="/auth/login"
-                                className="btn md:btn-sm btn-xs bg-[#123458] hover:bg-red-500 text-white">
+                                className="btn md:btn-sm btn-xs bg-slate-600 text-white">
                                 LogOut
                             </Link>
                         </>
@@ -157,12 +165,12 @@ const Navbar = () => {
                         <>
                             <Link
                                 to="/auth/login"
-                                className="btn btn-sm btn-outline">
+                                className="btn btn-sm bg-slate-400">
                                 Login
                             </Link>
                             <Link
                                 to="/auth/register"
-                                className="btn btn-sm bg-[#123458] text-white">
+                                className="btn btn-sm bg-slate-600 text-white">
                                 Register
                             </Link>
                         </>

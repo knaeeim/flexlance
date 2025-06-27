@@ -109,7 +109,7 @@ const AddTask = () => {
                         <label className="fieldset-legend">Budget</label>
                         <input
                             name="budget"
-                            type="text"
+                            type="number"
                             className="input w-full"
                             placeholder="Enter your Estimated Budget"
                             required
